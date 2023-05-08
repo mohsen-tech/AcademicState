@@ -1,0 +1,57 @@
+result of "reserved word"
+token ({ "int" }) 	at Ch0	in Ln1
+token ({ "int" }) 	at Ch3	in Ln3
+token ({ "while" }) 	at Ch3	in Ln6
+token ({ "print" }) 	at Ch6	in Ln7
+token ({ "read" }) 	at Ch6	in Ln8
+token ({ "return" }) 	at Ch3	in Ln12
+----------------------------------------------------------------------------------
+
+result of "meta statement"
+token ({ "#include <iostream>" }) 	at Ch0	in Ln0
+token ({ "// Local variable declaration:" }) 	at Ch3	in Ln2
+token ({ "// while loop execution" }) 	at Ch3	in Ln5
+----------------------------------------------------------------------------------
+
+result of "symbol"
+token ({ "(" }) 	at Ch9	in Ln1
+token ({ ")" }) 	at Ch10	in Ln1
+token ({ "{" }) 	at Ch12	in Ln1
+token ({ "=" }) 	at Ch9	in Ln3
+token ({ ";" }) 	at Ch13	in Ln3
+token ({ "(" }) 	at Ch8	in Ln6
+token ({ "<" }) 	at Ch12	in Ln6
+token ({ ")" }) 	at Ch17	in Ln6
+token ({ "{" }) 	at Ch19	in Ln6
+token ({ "(" }) 	at Ch11	in Ln7
+token ({ ")" }) 	at Ch26	in Ln7
+token ({ ";" }) 	at Ch27	in Ln7
+token ({ ";" }) 	at Ch12	in Ln8
+token ({ "=" }) 	at Ch8	in Ln9
+token ({ "+" }) 	at Ch12	in Ln9
+token ({ ";" }) 	at Ch15	in Ln9
+token ({ "}" }) 	at Ch3	in Ln10
+token ({ ";" }) 	at Ch11	in Ln12
+token ({ "}" }) 	at Ch0	in Ln13
+----------------------------------------------------------------------------------
+
+result of "identifier"
+token ({ "main" }) 	at Ch4	in Ln1
+token ({ "a" }) 	at Ch7	in Ln3
+token ({ "a" }) 	at Ch10	in Ln6
+token ({ "a" }) 	at Ch11	in Ln8
+token ({ "a" }) 	at Ch6	in Ln9
+token ({ "a" }) 	at Ch10	in Ln9
+----------------------------------------------------------------------------------
+
+result of "number"
+token ({ "10" }) 	at Ch11	in Ln3
+token ({ "20" }) 	at Ch14	in Ln6
+token ({ "1" }) 	at Ch14	in Ln9
+token ({ "0" }) 	at Ch10	in Ln12
+----------------------------------------------------------------------------------
+
+result of "string"
+token ({ ""value of a: "" }) 	at Ch12	in Ln7
+----------------------------------------------------------------------------------
+

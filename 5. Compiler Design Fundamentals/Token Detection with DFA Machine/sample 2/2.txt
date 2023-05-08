@@ -1,0 +1,33 @@
+result of "reserved word"
+token ({ "int" }) 	at Ch0	in Ln1
+token ({ "print" }) 	at Ch2	in Ln3
+token ({ "return" }) 	at Ch2	in Ln4
+----------------------------------------------------------------------------------
+
+result of "meta statement"
+token ({ "#include <iostream>" }) 	at Ch0	in Ln0
+----------------------------------------------------------------------------------
+
+result of "symbol"
+token ({ "(" }) 	at Ch8	in Ln1
+token ({ ")" }) 	at Ch9	in Ln1
+token ({ "{" }) 	at Ch0	in Ln2
+token ({ "(" }) 	at Ch7	in Ln3
+token ({ ")" }) 	at Ch23	in Ln3
+token ({ ";" }) 	at Ch24	in Ln3
+token ({ ";" }) 	at Ch10	in Ln4
+token ({ "}" }) 	at Ch0	in Ln5
+----------------------------------------------------------------------------------
+
+result of "identifier"
+token ({ "main" }) 	at Ch4	in Ln1
+----------------------------------------------------------------------------------
+
+result of "number"
+token ({ "0" }) 	at Ch9	in Ln4
+----------------------------------------------------------------------------------
+
+result of "string"
+token ({ ""Hello, World!"" }) 	at Ch8	in Ln3
+----------------------------------------------------------------------------------
+

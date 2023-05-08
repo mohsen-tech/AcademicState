@@ -1,0 +1,56 @@
+class Person
+{
+public:
+	Person(string a, string b, int c, string d)
+	{
+		FirstName = a;
+		LastNAme = b;
+		Age = c;
+		gender = d;
+	}
+	string FirstName;
+	string LastNAme;
+	int Age;
+	string gender;
+};
+class Perofesor : public Person
+{
+public:
+	Perofesor(string a, string b, int c, string d,float salary, string degree, string field) : Person(a,b,c,d)
+	{
+		salary = salary;
+		degree = degree;
+		field = field;
+	}
+	float salary;
+	string degree;
+	string field;
+};
+class Student : public Person
+{
+public:
+	Student(string a, string b, int c, string d,int StuId, string field, float avg, string level) : Person(a, b, c, d)
+	{
+		StuId = StuId;
+		field = field;
+		avg = avg;
+		level = level;
+	}
+	int StuId;
+	string field;
+	float avg;
+	string level;
+
+};
+class Expert : public Person
+{
+public:
+	Expert(string a, string b, int c, string d, int OfficeId, string field) : Person(a, b, c, d)
+	{
+		OfficeId = a;
+		field = b;
+	}
+	int OfficeId;
+	string field;
+};
+

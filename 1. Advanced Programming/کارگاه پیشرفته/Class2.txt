@@ -1,0 +1,205 @@
+#include <iostream>
+#include <string.h>
+#include <cstring>
+#include <string>
+using namespace std;
+class Person
+{
+public:
+	string FirstName;
+	string LastNAme;
+	int Age;
+	string gender;
+
+	Person() {}
+
+	Person(string a, string b, int c, string d)
+	{
+		FirstName = a;
+		LastNAme = b;
+		Age = c;
+		gender = d;
+	}
+};
+class Perofesor : public Person
+{
+public:
+	Perofesor()
+	{
+		salary = 2000000;
+	}
+	Perofesor(float salary, string degree, string field)
+	{
+		salary = salary;
+		degree = degree;
+		field = field;
+	}
+	float salary;
+	string degree;
+	string field;
+};
+class Student : public Person
+{
+public:
+	Student()
+	{
+		StuId = 0;
+	}
+	Student(int StuId, string field, float avg, string level)
+	{
+		StuId = StuId;
+		field = field;
+		avg = avg;
+		level = level;
+	}
+	int StuId;
+	string field;
+	float avg;
+	string level;
+
+};
+class Course
+{
+public:
+	Course() {}
+	Course(string Name, int Unit, int TeacherNum, int Code)
+	{
+		Name = Name;
+		Unit = Unit;
+		TeacherNum = TeacherNum;
+		Code = Code;
+	}
+	string Name;
+	int Unit;
+	int TeacherNum;
+	int Code;
+};
+class SelectedCourse
+{
+public:
+
+	SelectedCourse() {}
+	SelectedCourse(int StuNumber, int CourseCode)
+	{
+		StuNumber = StuNumber;
+		CourseCode = CourseCode;
+	}
+	int StuNumber;
+	int CourseCode;
+};
+
+Student student[5];
+Perofesor teacher[5];
+
+bool AddStudents();
+bool AddProfesor();
+bool AddCourse();
+bool AddSelectedCourse();
+
+int main()
+{
+	int Select;
+	cout << "1. Ezafe krdn Daneshjo\n\n";
+	cout << "2. Ezafe krdn Ostad\n\n";
+	cout << "3. Ezafe krdn Dars\n\n";
+	cout << "4. Entekhab Vahed\n\n";
+	cin >> Select;
+	switch (Select)
+	{
+	case 1:
+		system("cls");
+		for (size_t i = 0; i < 5; i++)
+		{
+			cout << i + 1 << ": ";
+			AddStudents();
+			cout << endl;
+		}
+
+
+	case 2:
+
+
+	case 3:
+
+
+	case 4:
+
+
+
+	default:
+		break;
+	}
+
+	for (size_t i = 0; i < 5; i++)
+	{
+		cout << i + 1 << ": " << student[i].StuId << "\t" << student[i].field << "\t" << student[i].avg << "\t" << student[i].level << "\n\n";
+
+	}
+
+
+	return 0;
+}
+bool AddStudents()
+{
+	Student s;
+	cout << "StuId: ";
+	cin >> s.StuId;
+	cout << "field: ";
+	cin >> s.field;
+	cout << "avg: ";
+	cin >> s.avg;
+	cout << "level: ";
+	cin >> s.level;
+
+	bool sw = false;
+	for (size_t i = 0; i < 5; i++)
+	{
+		if (student[i].StuId == 0)
+		{
+			student[i] = s;
+			sw = true;
+			break;
+		}
+	}
+	return sw;
+}
+
+/*bool AddProfesor()
+{
+	Perofesor p;
+	cin >> p.salary;
+	cin >> p.degree;
+	cin >> p.field;
+
+	bool sw = false;
+	for (size_t i = 0; i <= 4; i++)
+	{
+		if (teacher[i]. == 0)
+		{
+			teacher[i] = p;
+			sw = true;
+			break;
+		}
+	}
+	return sw;
+}
+bool AddCourse()
+{
+
+	Course c;
+
+	cin >> c.Name;
+	cin >> c.Unit;
+	cin >> c.TeacherNum;
+	cin >> c.Code;
+
+
+}
+bool AddSelectedCourse()
+{
+	SelectedCourse s;
+
+	cin >> s.StuNumber;
+	cin >> s.CourseCode;
+
+}*/

@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+void Prime(int a, int &sw)
+{
+	sw = 1;
+	for (int i = 2; i < a / 2 && sw; i++)
+		if (a%i == 0)
+			sw = 0;
+}
+int SumOfDigits(int a)
+{
+	int sum = 0;
+	while (a)
+	{
+		sum = sum + a % 10;
+		a = a / 10;
+	}
+	return sum;
+}
+int main()
+{
+	int j = 1, a, b;
+	for (int i = 1000; i < 10000; i++)
+	{
+		Prime(i, a);
+		Prime(SumOfDigits(i), b);
+		if (a && b)
+			cout << j++ << ":\t" << i << "\n\n";
+	}
+	return 0;
+}

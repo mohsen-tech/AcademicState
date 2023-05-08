@@ -1,0 +1,7 @@
+int inf void
+36 6 9 8945226
+#hi my name is
+//test for int
+decimal
+"this is a good dog"
+( 5 * 365 = B )

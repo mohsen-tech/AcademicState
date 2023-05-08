@@ -1,0 +1,69 @@
+result of "reserved word"
+token ({ "void" }) 	at Ch0	in Ln0
+token ({ "int" }) 	at Ch1	in Ln1
+token ({ "print" }) 	at Ch1	in Ln2
+token ({ "binary" }) 	at Ch1	in Ln3
+token ({ "while" }) 	at Ch1	in Ln4
+token ({ "if" }) 	at Ch2	in Ln7
+token ({ "break" }) 	at Ch3	in Ln8
+token ({ "string" }) 	at Ch1	in Ln10
+token ({ "write" }) 	at Ch1	in Ln11
+token ({ "return" }) 	at Ch1	in Ln12
+----------------------------------------------------------------------------------
+
+result of "meta statement"
+token ({ "// inja yek while darim" }) 	at Ch12	in Ln4
+----------------------------------------------------------------------------------
+
+result of "symbol"
+token ({ "(" }) 	at Ch9	in Ln0
+token ({ ")" }) 	at Ch10	in Ln0
+token ({ "{" }) 	at Ch12	in Ln0
+token ({ "=" }) 	at Ch7	in Ln1
+token ({ ";" }) 	at Ch10	in Ln1
+token ({ "(" }) 	at Ch6	in Ln2
+token ({ ")" }) 	at Ch8	in Ln2
+token ({ ";" }) 	at Ch9	in Ln2
+token ({ ";" }) 	at Ch10	in Ln3
+token ({ "(" }) 	at Ch7	in Ln4
+token ({ ")" }) 	at Ch10	in Ln4
+token ({ "{" }) 	at Ch1	in Ln5
+token ({ "=" }) 	at Ch4	in Ln6
+token ({ "+" }) 	at Ch8	in Ln6
+token ({ ";" }) 	at Ch11	in Ln6
+token ({ "(" }) 	at Ch5	in Ln7
+token ({ "==" }) 	at Ch8	in Ln7
+token ({ ")" }) 	at Ch13	in Ln7
+token ({ ";" }) 	at Ch8	in Ln8
+token ({ "}" }) 	at Ch1	in Ln9
+token ({ "=" }) 	at Ch12	in Ln10
+token ({ ";" }) 	at Ch26	in Ln10
+token ({ "(" }) 	at Ch6	in Ln11
+token ({ ")" }) 	at Ch10	in Ln11
+token ({ ";" }) 	at Ch7	in Ln12
+token ({ "}" }) 	at Ch0	in Ln13
+----------------------------------------------------------------------------------
+
+result of "identifier"
+token ({ "main" }) 	at Ch5	in Ln0
+token ({ "a" }) 	at Ch5	in Ln1
+token ({ "a" }) 	at Ch7	in Ln2
+token ({ "sw" }) 	at Ch8	in Ln3
+token ({ "sw" }) 	at Ch8	in Ln4
+token ({ "a" }) 	at Ch2	in Ln6
+token ({ "a" }) 	at Ch6	in Ln6
+token ({ "a" }) 	at Ch6	in Ln7
+token ({ "str" }) 	at Ch8	in Ln10
+token ({ "str" }) 	at Ch7	in Ln11
+----------------------------------------------------------------------------------
+
+result of "number"
+token ({ "1" }) 	at Ch9	in Ln1
+token ({ "2" }) 	at Ch10	in Ln6
+token ({ "13" }) 	at Ch11	in Ln7
+----------------------------------------------------------------------------------
+
+result of "string"
+token ({ ""awli shod!"" }) 	at Ch14	in Ln10
+----------------------------------------------------------------------------------
+

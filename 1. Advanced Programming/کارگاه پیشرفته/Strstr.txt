@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+int Strstr(const char *ch1, const char *ch2)
+{
+	for (size_t i = 0; ch1[i]; i++)
+	{
+		int sw = 1, result;
+		if (ch1[i] == ch2[0])
+		{
+			result = i;
+			for (size_t j = 0; ch2[j] && sw; j++)
+			{
+				if (ch1[i++] != ch2[j])
+				{
+					sw = 0;
+				}
+			}
+			if (sw)
+				return result;
+			i = result;
+		}
+	}
+	return -1;
+}
+char * Substrstr(const char *ch1, const char *ch2)
+{
+	char * ans = new char[0];
+	for (size_t i = 0; ch1[i]; i++)
+	{
+		int sw = 1, result;
+		if (ch1[i] == ch2[0])
+		{
+			result = i;
+			for (size_t j = 0; ch2[j] && sw; j++)
+			{
+				if (ch1[i++] != ch2[j])
+				{
+					sw = 0;
+				}
+			}
+			if (sw)
+			{
+				int k = 0;
+				int size = strlen(ch1);
+				ans = new char[size - result];
+				for (size_t j = result; ch1[j]; j++)
+				{
+					ans[k++] = ch1[j];
+				}
+				ans[k] = 0;
+				return ans;
+			}
+			i = result;
+		}
+	}
+}
+int main()
+{
+	char a[100], b[100];
+	while (cin >> a >> b)
+	{
+		cerr << "\n\n" << Strstr(a, b);
+		cerr << "\n\n" << Substrstr(a, b);
+		cerr << "\n\n" << strstr(a, b) << "\n\n";
+	}
+}

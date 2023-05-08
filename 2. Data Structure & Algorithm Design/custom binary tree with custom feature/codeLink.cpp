@@ -1,0 +1,1356 @@
+#include<iostream>
+#include<stack>
+#include<algorithm>
+#include<Windows.h>
+#include<vector>
+#include<conio.h>
+#include<string>
+#include<fstream>
+using namespace std;
+class AvlTree;
+class Node;
+class Time {
+private:
+	friend istream & operator >> (istream & _in, Time & _t);
+	friend ostream & operator << (ostream & _out, Time & _t);
+	int day, month, year;
+public:
+	void read(istream & _r) {
+		_r >> this->day >> this->month >> this->year;
+	}
+	void edit() {
+		bool sw = true;
+		while (sw) {
+			system("cls");
+			cout << *this << "\n1. edit roz\n2. edit mah\n3. edit sal\n0. bazgasht\n";
+			int choose;
+			cin >> choose;
+			switch (choose) {
+			case 0:
+				sw = false;
+				break;
+			case 1:
+				cout << "roz "; cin >> this->day;
+				break;
+			case 2:
+				cout << "mah "; cin >> this->month;
+				break;
+			case 3:
+				cout << "sal "; cin >> this->year;
+				break;
+			default:
+				break;
+			}
+		}
+		_getch();
+		system("cls");
+	}
+	int getDay() {
+		return this->day;
+	}
+	int getMonth() {
+		return this->month;
+	}
+	int getYear() {
+		return this->year;
+	}
+	bool operator == (const Time & _t) {
+		if (this->day == _t.day && this->month == _t.month && this->year == _t.year) return true;
+		return false;
+	}
+};
+istream & operator >> (istream & _in, Time & _t) {
+	cout << "roz, mah, sal ra vared konid ";
+	cin >> _t.day >> _t.month >> _t.year;
+	return _in;
+}
+ostream & operator << (ostream & _out, Time & _t) {
+	cout << "roz, mah, sal " << _t.day << " " << _t.month << " " << _t.year;
+	return _out;
+}
+class Person {
+private:
+	friend istream & operator >> (istream & _in, Person & _p);
+	friend ostream & operator << (ostream & _out, Person & _p);
+	string name, phone, mahal, melli;
+	Time tavalod;
+public:
+	void read(istream & _r) {
+		_r >> this->name >> this->phone >> this->mahal >> this->melli;
+		this->tavalod.read(_r);
+	}
+	Time getTavalod() {
+		return this->tavalod;
+	}
+	string getName() {
+		return this->name;
+	}
+	string getPhone() {
+		return this->phone;
+	}
+	string getMahal() {
+		return this->mahal;
+	}
+	string getMelli() {
+		return this->melli;
+	}
+	void edit() {
+		bool sw = true;
+		while (sw) {
+			system("cls");
+			cout << *this << "\n1. edit name\n2. edit shomare telephone\n3. edit tarikh tavalod\n4. edit mahal tavalod\n5. edit code melli\n0. bazgasht\n";
+			int choose;
+			cin >> choose;
+			switch (choose) {
+			case 0:
+				sw = false;
+				break;
+			case 1:
+				cout << "name "; cin >> this->name;
+				break;
+			case 2:
+				cout << "shomare telephone "; cin >> this->phone;
+				break;
+			case 3:
+				cout << "tarikh tavalod "; cin >> this->tavalod;
+				break;
+			case 4:
+				cout << "mahal tavalod "; cin >> this->mahal;
+				break;
+			case 5:
+				cout << "code melli "; cin >> this->melli;
+				break;
+			default:
+				break;
+			}
+		}
+		_getch();
+		system("cls");
+	}
+};
+istream & operator >> (istream & _in, Person & _p) {
+	cout << "name "; cin >> _p.name;
+	cout << "shomare telephone "; cin >> _p.phone;
+	cout << "tarikh tavalod "; cin >> _p.tavalod;
+	cout << "mahal tavalod "; cin >> _p.mahal;
+	cout << "code melli "; cin >> _p.melli;
+	return _in;
+}
+ostream & operator << (ostream & _out, Person & _p) {
+	cout << "name " << _p.name;
+	cout << "\nshomare telephone " << _p.phone;
+	cout << "\ntarikh tavalod " << _p.tavalod;
+	cout << "\nmahal tavalod " << _p.mahal;
+	cout << "\ncode melli " << _p.melli;
+	return _out;
+}
+class Film {
+private:
+	friend istream & operator >> (istream & _in, Film & _f);
+	friend ostream & operator << (ostream & _out, Film & _f);
+	vector <Person> tahie, kargardan, bazigar, badalkar;
+public:
+	void write(ofstream & _w) {
+		_w << 1 << "\n";
+		_w << this->tahie.size() << "\n";
+		for (int i = 0; i < this->tahie.size(); i++)
+			_w << this->tahie[i].getName() << "\n" << this->tahie[i].getPhone() << "\n" << this->tahie[i].getMahal() << "\n" << this->tahie[i].getMelli() << "\n" << this->tahie[i].getTavalod().getDay() << " " << this->tahie[i].getTavalod().getMonth() << " " << this->tahie[i].getTavalod().getYear() << "\n";
+		_w << this->kargardan.size() << "\n";
+		for (int i = 0; i < this->kargardan.size(); i++)
+			_w << this->kargardan[i].getName() << "\n" << this->kargardan[i].getPhone() << "\n" << this->kargardan[i].getMahal() << "\n" << this->kargardan[i].getMelli() << "\n" << this->kargardan[i].getTavalod().getDay() << " " << this->kargardan[i].getTavalod().getMonth() << " " << this->kargardan[i].getTavalod().getYear() << "\n";
+		_w << this->bazigar.size() << "\n";
+		for (int i = 0; i < this->bazigar.size(); i++)
+			_w << this->bazigar[i].getName() << "\n" << this->bazigar[i].getPhone() << "\n" << this->bazigar[i].getMahal() << "\n" << this->bazigar[i].getMelli() << "\n" << this->bazigar[i].getTavalod().getDay() << " " << this->bazigar[i].getTavalod().getMonth() << " " << this->bazigar[i].getTavalod().getYear() << "\n";
+		_w << this->badalkar.size() << "\n";
+		for (int i = 0; i < this->badalkar.size(); i++)
+			_w << this->badalkar[i].getName() << "\n" << this->badalkar[i].getPhone() << "\n" << this->badalkar[i].getMahal() << "\n" << this->badalkar[i].getMelli() << "\n" << this->badalkar[i].getTavalod().getDay() << " " << this->badalkar[i].getTavalod().getMonth() << " " << this->badalkar[i].getTavalod().getYear() << "\n";
+	}
+	void read(istream & _r) {
+		int size;
+		Person temp;
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->tahie.push_back(temp);
+		}
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->kargardan.push_back(temp);
+		}
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->bazigar.push_back(temp);
+		}
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->badalkar.push_back(temp);
+		}
+	}
+	void edit() {
+		bool sw = true;
+		while (sw) {
+			system("cls");
+			cout << *this << "\n1. edit tahie konande\n2. edit kargardan\n3. edit bazigar\n4. edit badalkar\n0. bazgasht\n";
+			int choose, andis;
+			cin >> choose;
+			switch (choose) {
+			case 0:
+				sw = false;
+				break;
+			case 1:
+				cout << "andis "; cin >> andis;
+				if (andis < this->tahie.size())
+					cin >> this->tahie[andis];
+				break;
+			case 2:
+				cout << "andis "; cin >> andis;
+				if (andis < this->kargardan.size())
+					cin >> this->kargardan[andis];
+				break;
+			case 3:
+				cout << "andis "; cin >> andis;
+				if (andis < this->bazigar.size())
+					cin >> this->bazigar[andis];
+				break;
+			case 4:
+				cout << "andis "; cin >> andis;
+				if (andis < this->badalkar.size())
+					cin >> this->badalkar[andis];
+				break;
+			default:
+				break;
+			}
+		}
+		_getch();
+		system("cls");
+	}
+	bool chSazande(const string & _s) {
+		for (int i = 0; i < this->tahie.size(); i++)
+			if (this->tahie[i].getName() == _s)
+				return true;
+		for (int i = 0; i < this->kargardan.size(); i++)
+			if (this->kargardan[i].getName() == _s)
+				return true;
+		return false;
+	}
+};
+istream & operator >> (istream & _in, Film & _f) {
+	int size;
+	Person temp;
+	cout << "tedad tahie konande "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_f.tahie.push_back(temp);
+	}
+	cout << "tedad kargardan "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_f.kargardan.push_back(temp);
+	}
+	cout << "tedad bazigar "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_f.bazigar.push_back(temp);
+	}
+	cout << "tedad badalkar "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_f.badalkar.push_back(temp);
+	}
+	return _in;
+}
+ostream & operator << (ostream & _out, Film & _f) {
+	cout << "tedad tahie konande " << _f.tahie.size() << "\n";
+	for (int i = 0; i < _f.tahie.size(); i++)
+		cout << i << "\n" << _f.tahie[i] << "\n";
+	cout << "tedad kargardan " << _f.kargardan.size() << "\n";
+	for (int i = 0; i < _f.kargardan.size(); i++)
+		cout << i << "\n" << _f.kargardan[i] << "\n";
+	cout << "tedad bazigar " << _f.bazigar.size() << "\n";
+	for (int i = 0; i < _f.bazigar.size(); i++)
+		cout << i << "\n" << _f.bazigar[i] << "\n";
+	cout << "tedad badalkar " << _f.badalkar.size() << "\n";
+	for (int i = 0; i < _f.badalkar.size(); i++)
+		cout << i << "\n" << _f.badalkar[i] << "\n";
+	return _out;
+}
+class Serial {
+	friend istream & operator >> (istream & _in, Serial & _s);
+	friend ostream & operator << (ostream & _out, Serial & _s);
+private:
+	vector <Person> tahie, kargardan, bazigar, badalkar;
+public:
+	void write(ofstream & _w) {
+		_w << 2 << "\n";
+		_w << this->tahie.size() << "\n";
+		for (int i = 0; i < this->tahie.size(); i++)
+			_w << this->tahie[i].getName() << "\n" << this->tahie[i].getPhone() << "\n" << this->tahie[i].getMahal() << "\n" << this->tahie[i].getMelli() << "\n" << this->tahie[i].getTavalod().getDay() << " " << this->tahie[i].getTavalod().getMonth() << " " << this->tahie[i].getTavalod().getYear() << "\n";
+		_w << this->kargardan.size() << "\n";
+		for (int i = 0; i < this->kargardan.size(); i++)
+			_w << this->kargardan[i].getName() << "\n" << this->kargardan[i].getPhone() << "\n" << this->kargardan[i].getMahal() << "\n" << this->kargardan[i].getMelli() << "\n" << this->kargardan[i].getTavalod().getDay() << " " << this->kargardan[i].getTavalod().getMonth() << " " << this->kargardan[i].getTavalod().getYear() << "\n";
+		_w << this->bazigar.size() << "\n";
+		for (int i = 0; i < this->bazigar.size(); i++)
+			_w << this->bazigar[i].getName() << "\n" << this->bazigar[i].getPhone() << "\n" << this->bazigar[i].getMahal() << "\n" << this->bazigar[i].getMelli() << "\n" << this->bazigar[i].getTavalod().getDay() << " " << this->bazigar[i].getTavalod().getMonth() << " " << this->bazigar[i].getTavalod().getYear() << "\n";
+		_w << this->badalkar.size() << "\n";
+		for (int i = 0; i < this->badalkar.size(); i++)
+			_w << this->badalkar[i].getName() << "\n" << this->badalkar[i].getPhone() << "\n" << this->badalkar[i].getMahal() << "\n" << this->badalkar[i].getMelli() << "\n" << this->badalkar[i].getTavalod().getDay() << " " << this->badalkar[i].getTavalod().getMonth() << " " << this->badalkar[i].getTavalod().getYear() << "\n";
+	}
+	void read(istream & _r) {
+		int size;
+		Person temp;
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->tahie.push_back(temp);
+		}
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->kargardan.push_back(temp);
+		}
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->bazigar.push_back(temp);
+		}
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->badalkar.push_back(temp);
+		}
+	}
+	void edit() {
+		bool sw = true;
+		while (sw) {
+			system("cls");
+			cout << *this << "\n1. edit tahie konande\n2. edit kargardan\n3. edit bazigar\n4. edit badalkar\n0. bazgasht\n";
+			int choose, andis;
+			cin >> choose;
+			switch (choose) {
+			case 0:
+				sw = false;
+				break;
+			case 1:
+				cout << "andis "; cin >> andis;
+				if (andis < this->tahie.size())
+					cin >> this->tahie[andis];
+				break;
+			case 2:
+				cout << "andis "; cin >> andis;
+				if (andis < this->kargardan.size())
+					cin >> this->kargardan[andis];
+				break;
+			case 3:
+				cout << "andis "; cin >> andis;
+				if (andis < this->bazigar.size())
+					cin >> this->bazigar[andis];
+				break;
+			case 4:
+				cout << "andis "; cin >> andis;
+				if (andis < this->badalkar.size())
+					cin >> this->badalkar[andis];
+				break;
+			default:
+				break;
+			}
+		}
+		_getch();
+		system("cls");
+	}
+	bool chSazande(const string & _s) {
+		for (int i = 0; i < this->tahie.size(); i++)
+			if (this->tahie[i].getName() == _s)
+				return true;
+		for (int i = 0; i < this->kargardan.size(); i++)
+			if (this->kargardan[i].getName() == _s)
+				return true;
+		return false;
+	}
+};
+istream & operator >> (istream & _in, Serial & _s) {
+	int size;
+	Person temp;
+	cout << "tedad tahie konande "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_s.tahie.push_back(temp);
+	}
+	cout << "tedad kargardan "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_s.kargardan.push_back(temp);
+	}
+	cout << "tedad bazigar "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_s.bazigar.push_back(temp);
+	}
+	cout << "tedad badalkar "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_s.badalkar.push_back(temp);
+	}
+	return _in;
+}
+ostream & operator << (ostream & _out, Serial & _s) {
+	cout << "tedad tahie konande " << _s.tahie.size() << "\n";
+	for (int i = 0; i < _s.tahie.size(); i++)
+		cout << i << "\n" << _s.tahie[i] << "\n";
+	cout << "tedad kargardan " << _s.kargardan.size() << "\n";
+	for (int i = 0; i < _s.kargardan.size(); i++)
+		cout << i << "\n" << _s.kargardan[i] << "\n";
+	cout << "tedad bazigar " << _s.bazigar.size() << "\n";
+	for (int i = 0; i < _s.bazigar.size(); i++)
+		cout << i << "\n" << _s.bazigar[i] << "\n";
+	cout << "tedad badalkar " << _s.badalkar.size() << "\n";
+	for (int i = 0; i < _s.badalkar.size(); i++)
+		cout << i << "\n" << _s.badalkar[i] << "\n";
+	return _out;
+}
+class MizGerd {
+private:
+	friend istream & operator >> (istream & _in, MizGerd & _m);
+	friend ostream & operator << (ostream & _out, MizGerd & _m);
+	vector <Person> tahie, kargardan, monshi, mojri;
+public:
+	void write(ofstream & _w) {
+		_w << 3 << "\n";
+		_w << this->tahie.size() << "\n";
+		for (int i = 0; i < this->tahie.size(); i++)
+			_w << this->tahie[i].getName() << "\n" << this->tahie[i].getPhone() << "\n" << this->tahie[i].getMahal() << "\n" << this->tahie[i].getMelli() << "\n" << this->tahie[i].getTavalod().getDay() << " " << this->tahie[i].getTavalod().getMonth() << " " << this->tahie[i].getTavalod().getYear() << "\n";
+		_w << this->kargardan.size() << "\n";
+		for (int i = 0; i < this->kargardan.size(); i++)
+			_w << this->kargardan[i].getName() << "\n" << this->kargardan[i].getPhone() << "\n" << this->kargardan[i].getMahal() << "\n" << this->kargardan[i].getMelli() << "\n" << this->kargardan[i].getTavalod().getDay() << " " << this->kargardan[i].getTavalod().getMonth() << " " << this->kargardan[i].getTavalod().getYear() << "\n";
+		_w << this->monshi.size() << "\n";
+		for (int i = 0; i < this->monshi.size(); i++)
+			_w << this->monshi[i].getName() << "\n" << this->monshi[i].getPhone() << "\n" << this->monshi[i].getMahal() << "\n" << this->monshi[i].getMelli() << "\n" << this->monshi[i].getTavalod().getDay() << " " << this->monshi[i].getTavalod().getMonth() << " " << this->monshi[i].getTavalod().getYear() << "\n";
+		_w << this->mojri.size() << "\n";
+		for (int i = 0; i < this->mojri.size(); i++)
+			_w << this->mojri[i].getName() << "\n" << this->mojri[i].getPhone() << "\n" << this->mojri[i].getMahal() << "\n" << this->mojri[i].getMelli() << "\n" << this->mojri[i].getTavalod().getDay() << " " << this->mojri[i].getTavalod().getMonth() << " " << this->mojri[i].getTavalod().getYear() << "\n";
+	}
+	void read(istream & _r) {
+		int size;
+		Person temp;
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->tahie.push_back(temp);
+		}
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->kargardan.push_back(temp);
+		}
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->monshi.push_back(temp);
+		}
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->mojri.push_back(temp);
+		}
+	}
+	void edit() {
+		bool sw = true;
+		while (sw) {
+			system("cls");
+			cout << *this << "\n1. edit tahie konande\n2. edit kargardan\n3. edit monshi sahne\n4. edit mojri\n0. bazgasht\n";
+			int choose, andis;
+			cin >> choose;
+			switch (choose) {
+			case 0:
+				sw = false;
+				break;
+			case 1:
+				cout << "andis "; cin >> andis;
+				if (andis < this->tahie.size())
+					cin >> this->tahie[andis];
+				break;
+			case 2:
+				cout << "andis "; cin >> andis;
+				if (andis < this->kargardan.size())
+					cin >> this->kargardan[andis];
+				break;
+			case 3:
+				cout << "andis "; cin >> andis;
+				if (andis < this->monshi.size())
+					cin >> this->monshi[andis];
+				break;
+			case 4:
+				cout << "andis "; cin >> andis;
+				if (andis < this->mojri.size())
+					cin >> this->mojri[andis];
+				break;
+			default:
+				break;
+			}
+		}
+		_getch();
+		system("cls");
+	}
+	bool chSazande(const string & _s) {
+		for (int i = 0; i < this->tahie.size(); i++)
+			if (this->tahie[i].getName() == _s)
+				return true;
+		for (int i = 0; i < this->kargardan.size(); i++)
+			if (this->kargardan[i].getName() == _s)
+				return true;
+		return false;
+	}
+};
+istream & operator >> (istream & _in, MizGerd & _m) {
+	int size;
+	Person temp;
+	cout << "tedad tahie konande "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_m.tahie.push_back(temp);
+	}
+	cout << "tedad kargardan "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_m.kargardan.push_back(temp);
+	}
+	cout << "tedad monshi sahne "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_m.monshi.push_back(temp);
+	}
+	cout << "tedad mojri "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_m.mojri.push_back(temp);
+	}
+	return _in;
+}
+ostream & operator << (ostream & _out, MizGerd & _m) {
+	cout << "tedad tahie konande " << _m.tahie.size() << "\n";
+	for (int i = 0; i < _m.tahie.size(); i++)
+		cout << i << "\n" << _m.tahie[i] << "\n";
+	cout << "tedad kargardan " << _m.kargardan.size() << "\n";
+	for (int i = 0; i < _m.kargardan.size(); i++)
+		cout << i << "\n" << _m.kargardan[i] << "\n";
+	cout << "tedad monshi sahne " << _m.monshi.size() << "\n";
+	for (int i = 0; i < _m.monshi.size(); i++)
+		cout << i << "\n" << _m.monshi[i] << "\n";
+	cout << "tedad mojri " << _m.mojri.size() << "\n";
+	for (int i = 0; i < _m.mojri.size(); i++)
+		cout << i << "\n" << _m.mojri[i] << "\n";
+	return _out;
+}
+class Mosabeqe {
+private:
+	friend istream & operator >> (istream & _in, Mosabeqe & _m);
+	friend ostream & operator << (ostream & _out, Mosabeqe & _m);
+	vector <Person> tahie, kargardan, monshi, mojri, sherkatkonande;
+public:
+	void write(ofstream & _w) {
+		_w << 4 << "\n";
+		_w << this->tahie.size() << "\n";
+		for (int i = 0; i < this->tahie.size(); i++)
+			_w << this->tahie[i].getName() << "\n" << this->tahie[i].getPhone() << "\n" << this->tahie[i].getMahal() << "\n" << this->tahie[i].getMelli() << "\n" << this->tahie[i].getTavalod().getDay() << " " << this->tahie[i].getTavalod().getMonth() << " " << this->tahie[i].getTavalod().getYear() << "\n";
+		_w << this->kargardan.size() << "\n";
+		for (int i = 0; i < this->kargardan.size(); i++)
+			_w << this->kargardan[i].getName() << "\n" << this->kargardan[i].getPhone() << "\n" << this->kargardan[i].getMahal() << "\n" << this->kargardan[i].getMelli() << "\n" << this->kargardan[i].getTavalod().getDay() << " " << this->kargardan[i].getTavalod().getMonth() << " " << this->kargardan[i].getTavalod().getYear() << "\n";
+		_w << this->monshi.size() << "\n";
+		for (int i = 0; i < this->monshi.size(); i++)
+			_w << this->monshi[i].getName() << "\n" << this->monshi[i].getPhone() << "\n" << this->monshi[i].getMahal() << "\n" << this->monshi[i].getMelli() << "\n" << this->monshi[i].getTavalod().getDay() << " " << this->monshi[i].getTavalod().getMonth() << " " << this->monshi[i].getTavalod().getYear() << "\n";
+		_w << this->mojri.size() << "\n";
+		for (int i = 0; i < this->mojri.size(); i++)
+			_w << this->mojri[i].getName() << "\n" << this->mojri[i].getPhone() << "\n" << this->mojri[i].getMahal() << "\n" << this->mojri[i].getMelli() << "\n" << this->mojri[i].getTavalod().getDay() << " " << this->mojri[i].getTavalod().getMonth() << " " << this->mojri[i].getTavalod().getYear() << "\n";
+		_w << this->sherkatkonande.size() << "\n";
+		for (int i = 0; i < this->sherkatkonande.size(); i++)
+			_w << this->sherkatkonande[i].getName() << "\n" << this->sherkatkonande[i].getPhone() << "\n" << this->sherkatkonande[i].getMahal() << "\n" << this->sherkatkonande[i].getMelli() << "\n" << this->sherkatkonande[i].getTavalod().getDay() << " " << this->sherkatkonande[i].getTavalod().getMonth() << " " << this->sherkatkonande[i].getTavalod().getYear() << "\n";
+	}
+	void read(istream & _r) {
+		int size;
+		Person temp;
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->tahie.push_back(temp);
+		}
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->kargardan.push_back(temp);
+		}
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->monshi.push_back(temp);
+		}
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->mojri.push_back(temp);
+		}
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->sherkatkonande.push_back(temp);
+		}
+	}
+	void edit() {
+		bool sw = true;
+		while (sw) {
+			system("cls");
+			cout << *this << "\n1. edit tahie konande\n2. edit kargardan\n3. edit monshi sahne\n4. edit mojri\n5. edit sherkat konande\n0. bazgasht\n";
+			int choose, andis;
+			cin >> choose;
+			switch (choose) {
+			case 0:
+				sw = false;
+				break;
+			case 1:
+				cout << "andis "; cin >> andis;
+				if (andis < this->tahie.size())
+					cin >> this->tahie[andis];
+				break;
+			case 2:
+				cout << "andis "; cin >> andis;
+				if (andis < this->kargardan.size())
+					cin >> this->kargardan[andis];
+				break;
+			case 3:
+				cout << "andis "; cin >> andis;
+				if (andis < this->monshi.size())
+					cin >> this->monshi[andis];
+				break;
+			case 4:
+				cout << "andis "; cin >> andis;
+				if (andis < this->mojri.size())
+					cin >> this->mojri[andis];
+				break;
+			case 5:
+				cout << "andis "; cin >> andis;
+				if (andis < this->sherkatkonande.size())
+					cin >> this->sherkatkonande[andis];
+				break;
+			default:
+				break;
+			}
+		}
+		_getch();
+		system("cls");
+	}
+	bool chSazande(const string & _s) {
+		for (int i = 0; i < this->tahie.size(); i++)
+			if (this->tahie[i].getName() == _s)
+				return true;
+		for (int i = 0; i < this->kargardan.size(); i++)
+			if (this->kargardan[i].getName() == _s)
+				return true;
+		return false;
+	}
+};
+istream & operator >> (istream & _in, Mosabeqe & _m) {
+	int size;
+	Person temp;
+	cout << "tedad tahie konande "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_m.tahie.push_back(temp);
+	}
+	cout << "tedad kargardan "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_m.kargardan.push_back(temp);
+	}
+	cout << "tedad monshi sahne "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_m.monshi.push_back(temp);
+	}
+	cout << "tedad mojri "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_m.mojri.push_back(temp);
+	}
+	cout << "tedad sherkat konande "; cin >> size;
+	for (int i = 0; i < size; i++) {
+		cin >> temp;
+		_m.sherkatkonande.push_back(temp);
+	}
+	return _in;
+}
+ostream & operator << (ostream & _out, Mosabeqe & _m) {
+	cout << "tedad tahie konande " << _m.tahie.size() << "\n";
+	for (int i = 0; i < _m.tahie.size(); i++)
+		cout << i << "\n" << _m.tahie[i] << "\n";
+	cout << "tedad kargardan " << _m.kargardan.size() << "\n";
+	for (int i = 0; i < _m.kargardan.size(); i++)
+		cout << i << "\n" << _m.kargardan[i] << "\n";
+	cout << "tedad monshi sahne " << _m.monshi.size() << "\n";
+	for (int i = 0; i < _m.monshi.size(); i++)
+		cout << i << "\n" << _m.monshi[i] << "\n";
+	cout << "tedad mojri " << _m.mojri.size() << "\n";
+	for (int i = 0; i < _m.mojri.size(); i++)
+		cout << i << "\n" << _m.mojri[i] << "\n";
+	cout << "tedad sherkat konande " << _m.sherkatkonande.size() << "\n";
+	for (int i = 0; i < _m.sherkatkonande.size(); i++)
+		cout << i << "\n" << _m.sherkatkonande[i] << "\n";
+	return _out;
+}
+class Tekrar {
+private:
+	friend istream & operator >> (istream & _in, Tekrar & _t);
+	friend ostream & operator << (ostream & _out, Tekrar & _t);
+	Time pakhsh;
+	string tv;
+public:
+	void read(istream & _r) {
+		this->pakhsh.read(_r);
+		_r >> this->tv;
+	}
+	string getTv() {
+		return this->tv;
+	}
+	Time getPakhsh() {
+		return this->pakhsh;
+	}
+	void edit() {
+		bool sw = true;
+		while (sw) {
+			system("cls");
+			cout << *this << "\n1. edit tarikh pakhsh\n2. edit chanal\n0. bazgasht\n";
+			int choose;
+			cin >> choose;
+			switch (choose) {
+			case 0:
+				sw = false;
+				break;
+			case 1:
+				cout << "tarikh pakhsh "; cin >> this->pakhsh;
+				break;
+			case 2:
+				cout << "chanale "; cin >> this->tv;
+				break;
+			default:
+				break;
+			}
+		}
+		_getch();
+		system("cls");
+	}
+};
+istream & operator >> (istream & _in, Tekrar & _t) {
+	cout << "tarikh pakhsh "; cin >> _t.pakhsh;
+	cout << "chanale "; cin >> _t.tv;
+	return _in;
+}
+ostream & operator << (ostream & _out, Tekrar & _t) {
+	cout << "tarikh pakhsh " << _t.pakhsh;
+	cout << "\nchanale " << _t.tv;
+	return _out;
+}
+class Node {
+private:
+	friend class AvlTree;
+	friend istream & operator >> (istream & _in, Node & _n);
+	friend ostream & operator << (ostream & _out, Node & _n);
+	string name;
+	int code;
+	Time sakht, avalinNamayesh;
+	Film * film;
+	Serial * serial;
+	MizGerd * mizGerd;
+	Mosabeqe * mosabeqe;
+	vector<Tekrar> pakhsh;
+	Node * right;
+	Node * left;
+public:
+	void write(ofstream & _w) {
+		_w << this->name << "\n" << this->code << "\n";
+		_w << this->sakht.getDay() << " " << this->sakht.getMonth() << " " << this->sakht.getYear() << "\n";
+		_w << this->avalinNamayesh.getDay() << " " << this->avalinNamayesh.getMonth() << " " << this->avalinNamayesh.getYear() << "\n";
+		if (this->film != nullptr)
+			this->film->write(_w);
+		else if (this->serial != nullptr)
+			this->serial->write(_w);
+		else if (this->mizGerd != nullptr)
+			this->mizGerd->write(_w);
+		else if (this->mosabeqe != nullptr)
+			this->mosabeqe->write(_w);
+		_w << this->pakhsh.size() << "\n";
+		for (int i = 0; i < this->pakhsh.size(); i++)
+			_w << this->pakhsh[i].getPakhsh().getDay() << " " << this->pakhsh[i].getPakhsh().getMonth() << " " << this->pakhsh[i].getPakhsh().getYear() << " " << this->pakhsh[i].getTv() << "\n";
+	}
+	void read(istream & _r) {
+		int size;
+		Tekrar temp;
+		_r >> this->name >> this->code;
+		this->sakht.read(_r);
+		this->avalinNamayesh.read(_r);
+		_r >> size;
+		if (size == 1) {
+			this->film = new Film;
+			this->film->read(_r);
+		}
+		else if (size == 2) {
+			this->serial = new Serial;
+			this->serial->read(_r);
+		}
+		else if (size == 3) {
+			this->mizGerd = new MizGerd;
+			this->mizGerd->read(_r);
+		}
+		else if (size == 4) {
+			this->mosabeqe = new Mosabeqe;
+			this->mosabeqe->read(_r);
+		}
+		_r >> size;
+		for (int i = 0; i < size; i++) {
+			temp.read(_r);
+			this->pakhsh.push_back(temp);
+		}
+	}
+	Node() {
+		this->right = nullptr;
+		this->left = nullptr;
+		film = nullptr;
+		serial = nullptr;
+		mizGerd = nullptr;
+		mosabeqe = nullptr;
+	}
+	Node(const Node & _data) {
+		*this = _data;
+		this->right = nullptr;
+		this->left = nullptr;
+	}
+	void edit() {
+		bool sw = true;
+		while (sw) {
+			system("cls");
+			cout << *this << "\n1. edit name\n2. edit tarikh sakht\n3. edit tarikh avalin namayesh\n4. edit tekrar pakhsh\n5. edit model barname\n6. edit dastankaran\n0. bazgasht\n";
+			int choose, andis;
+			cin >> choose;
+			switch (choose) {
+			case 0:
+				sw = false;
+				break;
+			case 1:
+				cout << "name "; cin >> this->name;
+				break;
+			case 2:
+				cout << "tarikh sakht "; this->sakht.edit();
+				break;
+			case 3:
+				cout << "tarikh avalin namayesh "; this->avalinNamayesh.edit();
+				break;
+			case 4:
+				cout << "andis "; cin >> andis;
+				if (andis < this->pakhsh.size())
+					this->pakhsh[andis].edit();
+				break;
+			case 5:
+				cout << "1.film, 2.serial, 3.mizGerd, 4.mosabeqe? "; cin >> choose;
+				if (this->film != nullptr)
+					delete this->film;
+				else if (this->serial != nullptr)
+					delete this->serial;
+				else if (this->mizGerd != nullptr)
+					delete this->mizGerd;
+				else if (this->mosabeqe != nullptr)
+					delete this->mosabeqe;
+				if (choose == 1) {
+					this->film = new Film;
+					cin >> *film;
+				}
+				else if (choose == 2) {
+					this->serial = new Serial;
+					cin >> *serial;
+				}
+				else if (choose == 3) {
+					this->mizGerd = new MizGerd;
+					cin >> *mizGerd;
+				}
+				else if (choose == 4) {
+					this->mosabeqe = new Mosabeqe;
+					cin >> *mosabeqe;
+				}
+				break;
+			case 6:
+				if (this->film != nullptr)
+					this->film->edit();
+				else if (this->serial != nullptr)
+					this->serial->edit();
+				else if (this->mizGerd != nullptr)
+					this->mizGerd->edit();
+				else if (this->mosabeqe != nullptr)
+					this->mosabeqe->edit();
+				break;
+			default:
+				break;
+			}
+		}
+		_getch();
+		system("cls");
+	}
+	bool chTime(const Time & _t) {
+		if (this->avalinNamayesh == _t)
+			return true;
+		if (this->sakht == _t)
+			return true;
+		for (int i = 0; i < this->pakhsh.size(); i++)
+			if (this->pakhsh[i].getPakhsh() == _t)
+				return true;
+		return false;
+	}
+	bool chTv(const string & _s) {
+		for (int i = 0; i < this->pakhsh.size(); i++)
+			if (this->pakhsh[i].getTv() == _s)
+				return true;
+		return false;
+	}
+	int getCode() {
+		return this->code;
+	}
+	void addTekrar(const Tekrar & t) {
+		this->pakhsh.push_back(t);
+	}
+	bool chSazande(const string & _s) {
+		if (this->film != nullptr)
+			return this->film->chSazande(_s);
+		else if (this->serial != nullptr)
+			return this->serial->chSazande(_s);
+		else if (this->mizGerd != nullptr)
+			return this->mizGerd->chSazande(_s);
+		else if (this->mosabeqe != nullptr)
+			return this->mosabeqe->chSazande(_s);
+	}
+};
+istream & operator >> (istream & _in, Node & _n) {
+	cout << "name "; cin >> _n.name;
+	cout << "code "; cin >> _n.code;
+	cout << "tarikh sakht "; cin >> _n.sakht;
+	cout << "tarikh avalin namayesh "; cin >> _n.avalinNamayesh;
+	int choose;
+	cout << "1.film, 2.serial, 3.mizGerd, 4.mosabeqe? "; cin >> choose;
+	if (choose == 1) {
+		_n.film = new Film;
+		cin >> *_n.film;
+	}
+	else if (choose == 2) {
+		_n.serial = new Serial;
+		cin >> *_n.serial;
+	}
+	else if (choose == 3) {
+		_n.mizGerd = new MizGerd;
+		cin >> *_n.mizGerd;
+	}
+	else if (choose == 4) {
+		_n.mosabeqe = new Mosabeqe;
+		cin >> *_n.mosabeqe;
+	}
+	return _in;
+}
+ostream & operator << (ostream & _out, Node & _n) {
+	cout << "name " << _n.name;
+	cout << "\ncode " << _n.code;
+	cout << "\ntarikh sakht " << _n.sakht;
+	cout << "\ntarikh avalin namayesh " << _n.avalinNamayesh;
+	cout << "\ntedad tekrar pakhsh " << _n.pakhsh.size() << "\n";
+	for (int i = 0; i < _n.pakhsh.size(); i++)
+		cout << i << "\n" << _n.pakhsh[i] << "\n";
+	if (_n.film != nullptr)
+		cout << "film\n" << *_n.film;
+	else if (_n.serial != nullptr)
+		cout << "serial\n" << *_n.serial;
+	else if (_n.mizGerd != nullptr)
+		cout << "mize gerd\n" << *_n.mizGerd;
+	else if (_n.mosabeqe != nullptr)
+		cout << "mosabeqe\n" << *_n.mosabeqe;
+	return _out;
+}
+class AvlTree {
+private:
+	Node * root;
+	Node * insert(Node * _now, const Node & _data) {
+		if (!_now)
+			_now = new Node(_data);
+		else if (_data.code < _now->code) {
+			_now->left = this->insert(_now->left, _data);
+			_now = this->balance(_now);
+		}
+		else if (_data.code > _now->code) {
+			_now->right = this->insert(_now->right, _data);
+			_now = this->balance(_now);
+		}
+		return _now;
+	}
+	int height(Node * _root) {
+		if (_root)
+			return 1 + max(this->height(_root->left), this->height(_root->right));
+		return 0;
+	}
+	int balanceFactor(Node * _root) {
+		return this->height(_root->right) - this->height(_root->left);
+	}
+	Node * leftLeft(Node *_parent) {
+		Node * _temp = _parent->left;
+		_parent->left = _temp->right;
+		_temp->right = _parent;
+		return _temp;
+	}
+	Node * rightRight(Node * _parent) {
+		Node * _temp = _parent->right;
+		_parent->right = _temp->left;
+		_temp->left = _parent;
+		return _temp;
+	}
+	Node * rightLeft(Node *_parent) {
+		Node *_pr = _parent->right;
+		Node *_temp = _pr->left;
+		_parent->right = _temp->left;
+		_temp->left = _parent;
+		_pr->left = _temp->right;
+		_temp->right = _pr;
+		return _temp;
+	}
+	Node * LeftRight(Node *_parent) {
+		Node *_pl = _parent->left;
+		Node *_temp = _pl->right;
+		_parent->left = _temp->right;
+		_pl->right = _temp->left;
+		_temp->right = _parent;
+		_temp->left = _pl;
+		return _temp;
+	}
+	Node * balance(Node * _root) {
+		int bf = this->balanceFactor(_root);
+		if (bf > 1) {
+			if (this->balanceFactor(_root->right) > 0)
+				_root = this->rightRight(_root);
+			else
+				_root = this->rightLeft(_root);
+		}
+		else if (bf < -1) {
+			if (this->balanceFactor(_root->left) > 0)
+				_root = this->LeftRight(_root);
+			else
+				_root = this->leftLeft(_root);
+		}
+		return _root;
+	}
+	Node * parent(Node * _now) {
+		Node * cur = this->root;
+		while (cur)
+			if (cur->left == _now || cur->right == _now)
+				return cur;
+			else
+				if (_now->code > cur->code)
+					cur = cur->right;
+				else
+					cur = cur->left;
+		return nullptr;
+	}
+	void remove(const int & _code) {
+		if (!this->root->left && !this->root->right) {
+			this->root = nullptr;
+			delete this->root;
+			return;
+		}
+		stack <Node *> s;
+		Node * cur = this->root;
+		Node * parentCur = nullptr;
+		// Find Node
+		while (cur) {
+			if (_code < cur->code) {
+				s.push(cur);
+				parentCur = cur;
+				cur = cur->left;
+			}
+			else if (_code > cur->code) {
+				s.push(cur);
+				parentCur = cur;
+				cur = cur->right;
+			}
+			else break;
+		}
+		// if Node Has 2Child
+		if (cur->left && cur->right) {
+			s.push(cur);
+			Node * temp = cur->left;
+			Node * p = cur;
+			while (temp->right) {
+				s.push(temp);
+				p = temp;
+				temp = temp->right;
+			}
+			if (p != cur)
+				p->right = temp->left;
+			else
+				p->left = temp->left;
+			cur->code = temp->code;
+			temp = nullptr;
+			delete temp;
+		}
+		// if Node Has Right Child
+		else if (cur->right && cur->left == nullptr) {
+			if (parentCur->left == cur) {
+				parentCur->left = cur->right;
+				s.push(parentCur->left);
+			}
+			else {
+				parentCur->right = cur->right;
+				s.push(parentCur->right);
+			}
+			delete cur;
+		}
+		// if Node Has Left Child
+		else if (cur->left && cur->right == nullptr) {
+			if (parentCur->left == cur) {
+				parentCur->left = cur->left;
+				s.push(parentCur->left);
+			}
+			else {
+				parentCur->right = cur->left;
+				s.push(parentCur->right);
+			}
+			delete cur;
+		}
+		// if Node HasNot Child
+		else if (cur->left == nullptr && cur->right == nullptr) {
+			if (parentCur->left == cur) {
+				delete cur;
+				parentCur->left = nullptr;
+			}
+			else {
+				delete cur;
+				parentCur->right = nullptr;
+			}
+		}
+		// Fix the Tree After Delete Node
+		while (!s.empty()) {
+			Node * temp = s.top();
+			Node * p = 0;
+			s.pop();
+			if (temp == this->root)
+				this->root = this->balance(temp);
+			else {
+				p = this->parent(temp);
+				if (p->left == temp)
+					p->left = this->balance(temp);
+				else
+					p->right = this->balance(temp);
+			}
+		}
+	}
+	bool search(Node * _root, const int & _code) {
+		if (_root == nullptr) return false;
+		if (_root->code == _code) return true;
+		else
+			if (_root->code > _code)
+				return this->search(_root->left, _code);
+			else
+				return this->search(_root->right, _code);
+	}
+	bool edit(Node * _root, const int & _code) {
+		if (_root == nullptr) return false;
+		if (_root->code == _code) {
+			_root->edit();
+			return true;
+		}
+		else
+			if (_root->code > _code)
+				return this->edit(_root->left, _code);
+			else
+				return this->edit(_root->right, _code);
+	}
+	bool addTekrar(Node * _root, const int & _code) {
+		if (_root == nullptr) return false;
+		if (_root->code == _code) {
+			Tekrar t;
+			cin >> t;
+			_root->addTekrar(t);
+			return true;
+		}
+		else
+			if (_root->code > _code)
+				return this->addTekrar(_root->left, _code);
+			else
+				return this->addTekrar(_root->right, _code);
+	}
+	void print(Node * _root) {
+		if (_root == nullptr) return;
+		this->print(_root->left);
+		cout << *_root << "\n\n";
+		this->print(_root->right);
+	}
+	void write(Node * _root, ofstream & _w) {
+		if (_root == nullptr) return;
+		this->write(_root->left, _w);
+		_w << 1 << "\n";
+		_root->write(_w);
+		this->write(_root->right, _w);
+	}
+	void print(Node * _root, const Time & _t) {
+		if (_root == nullptr) return;
+		this->print(_root->left, _t);
+		if (_root->chTime(_t))
+			cout << *_root << "\n\n";
+		this->print(_root->right, _t);
+	}
+	void print(Node * _root, const string & _s) {
+		if (_root == nullptr) return;
+		this->print(_root->left, _s);
+		if (_root->chTv(_s))
+			cout << *_root << "\n\n";
+		this->print(_root->right, _s);
+	}
+	void printSazande(Node * _root, const string & _s) {
+		if (_root == nullptr) return;
+		this->printSazande(_root->left, _s);
+		if (_root->chSazande(_s))
+			cout << *_root << "\n\n";
+		this->printSazande(_root->right, _s);
+	}
+	void print(Node * _root, const int & _i) {
+		if (_root == nullptr) return;
+		this->print(_root->left, _i);
+		if (_root->pakhsh.size() > _i)
+			cout << *_root << "\n\n";
+		this->print(_root->right, _i);
+	}
+public:
+	AvlTree() {
+		root = nullptr;
+	}
+	bool remove(const int & _code, const bool & _overload) {
+		if (this->search(_code) == true) {
+			this->remove(_code); return true;
+		}
+		else return false;
+	}
+	void write() {
+		ofstream myfile;
+		myfile.open("mydata.txt");
+		this->write(this->root, myfile);
+		myfile << 0;
+		myfile.close();
+	}
+	void insert(const Node & _data) {
+		root = this->insert(root, _data);
+	}
+	bool edit(const int & _code) {
+		return this->edit(this->root, _code);
+	}
+	bool search(const int & _code) {
+		return this->search(root, _code);
+	}
+	bool addTekrar(const int & _code) {
+		return this->addTekrar(root, _code);
+	}
+	void print() {
+		this->print(this->root);
+	}
+	void print(const Time & _t) {
+		this->print(this->root, _t);
+	}
+	void print(const string & _s) {
+		this->print(this->root, _s);
+	}
+	void printSazande(const string & _s) {
+		this->printSazande(this->root, _s);
+	}
+	void print(const int & _i) {
+		this->print(this->root, _i);
+	}
+};
+void menu() {
+	AvlTree tree;
+	int code, n;
+	string name;
+	Time t;
+	ifstream myfile("mydata.txt");
+	if (myfile.is_open()) {
+		while (myfile >> n && n) {
+			Node node;
+			node.read(myfile);
+			if (tree.search(node.getCode()) == false) {
+				tree.insert(node);
+			}
+		}
+	}
+	while (1) {
+		Node node;
+		system("cls");
+		cout << "1. ezafe krdn barname jadid\n";
+		cout << "2. hazf krdn barname\n";
+		cout << "3. virayesh krdn barname\n";
+		cout << "4. search krdn barname\n";
+		cout << "5. sabt krdn tekrar barname\n";
+		cout << "6. chap krdn barnameha\n";
+		cout << "7. chap krdn barnameha bar hasb tarikh\n";
+		cout << "8. chap krdn barnameha bar hasb chanal\n";
+		cout << "9. chap krdn barnameha bar hasb sazande\n";
+		cout << "10. chap krdn barnameha bar hasb tekrar\n";
+		cout << "0. exit\n";
+		int choose;
+		cin >> choose;
+		switch (choose) {
+		case 0:
+			tree.write();
+			return;
+			break;
+		case 1:
+			cin >> node;
+			if (tree.search(node.getCode()) == false) {
+				tree.insert(node);
+				cout << "\nnode ezafe shod\n";
+			}
+			else cout << "\nnode ezafe nashod\n";
+			break;
+		case 2:
+			cout << "code "; cin >> code;
+			if (tree.remove(code, true) == true)
+				cout << "\nnode hazf shod\n";
+			else cout << "\nnode hazf nashod\n";
+			break;
+		case 3:
+			cout << "code "; cin >> code;
+			if (tree.edit(code) == true)
+				cout << "\nnode edit shod\n";
+			else cout << "\nnode edit nashod\n";
+			break;
+		case 4:
+			cout << "code "; cin >> code; cout << boolalpha << tree.search(code) << "\n";
+			break;
+		case 5:
+			cout << "code "; cin >> code;
+			if (tree.addTekrar(code) == true)
+				cout << "\ntekrar barname ezafe shod\n";
+			else cout << "\ntekrar barname ezafe nashod\n";
+			break;
+		case 6:
+			tree.print();
+			break;
+		case 7:
+			cout << "tarikh "; cin >> t; tree.print(t);
+			break;
+		case 8:
+			cout << "chanale "; cin >> name; tree.print(name);
+			break;
+		case 9:
+			cout << "sazande "; cin >> name; tree.printSazande(name);
+			break;
+		case 10:
+			cout << "tekrar "; cin >> n; tree.print(n);
+			break;
+		default:
+			break;
+		}
+		_getch();
+		system("cls");
+	}
+}
+int main() {
+	menu();
+	return 0;
+}

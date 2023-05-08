@@ -1,0 +1,6 @@
+D1 TX 
+D2 RX 
+ 
+D5 ring 
+D6 DTR 
+D7 digital out

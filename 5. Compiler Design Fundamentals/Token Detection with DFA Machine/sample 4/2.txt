@@ -1,0 +1,36 @@
+result of "reserved word"
+token ({ "int" }) 	at Ch0	in Ln0
+token ({ "void" }) 	at Ch8	in Ln0
+token ({ "decimal" }) 	at Ch0	in Ln4
+----------------------------------------------------------------------------------
+
+result of "meta statement"
+token ({ "#hi my name is" }) 	at Ch0	in Ln2
+token ({ "//test for int" }) 	at Ch0	in Ln3
+----------------------------------------------------------------------------------
+
+result of "symbol"
+token ({ "(" }) 	at Ch0	in Ln6
+token ({ "*" }) 	at Ch4	in Ln6
+token ({ "=" }) 	at Ch10	in Ln6
+token ({ ")" }) 	at Ch14	in Ln6
+----------------------------------------------------------------------------------
+
+result of "identifier"
+token ({ "inf" }) 	at Ch4	in Ln0
+token ({ "B" }) 	at Ch12	in Ln6
+----------------------------------------------------------------------------------
+
+result of "number"
+token ({ "36" }) 	at Ch0	in Ln1
+token ({ "6" }) 	at Ch3	in Ln1
+token ({ "9" }) 	at Ch5	in Ln1
+token ({ "8945226" }) 	at Ch7	in Ln1
+token ({ "5" }) 	at Ch2	in Ln6
+token ({ "365" }) 	at Ch6	in Ln6
+----------------------------------------------------------------------------------
+
+result of "string"
+token ({ ""this is a good dog"" }) 	at Ch0	in Ln5
+----------------------------------------------------------------------------------
+

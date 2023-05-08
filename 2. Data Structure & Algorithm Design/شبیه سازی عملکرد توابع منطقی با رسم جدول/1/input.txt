@@ -1,0 +1,9 @@
+Operators:
++ or
+* and
+~ not
+@ xor
+Functions:
+O1= (A6+~A6)* (((~A5*((A4@~A1)*~A2))+(A5*((A4@~A1)*A2))))
+O2=(A7+O1)*(A6+A5+A8)
+O3 = (O1*O2) + A9
